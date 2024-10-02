@@ -1,9 +1,9 @@
-import cv2
-import math
 import urllib
 import pathlib
 
 import numpy as np
+
+import cv2
 
 import mediapipe as mp
 from mediapipe.tasks.python.core import base_options as base_options_module

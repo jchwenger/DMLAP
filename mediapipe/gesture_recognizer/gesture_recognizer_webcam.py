@@ -1,8 +1,9 @@
-import cv2
 import urllib
 import pathlib
 
 import numpy as np
+
+import cv2
 
 import mediapipe as mp
 from mediapipe.framework.formats import landmark_pb2
@@ -36,13 +37,13 @@ print(
     "\n".join(
         [
             "None",
-            "Closed_Fist",
-            "Open_Palm",
-            "Pointing_Up",
-            "Thumb_Down",
-            "Thumb_Up",
-            "Victory",
-            "ILoveYou",
+            "Closed_Fist ✊",
+            "Open_Palm 👋",
+            "Pointing_Up ☝️",
+            "Thumb_Down 👎",
+            "Thumb_Up 👍",
+            "Victory  ✌️ ",
+            "ILoveYou 🤟",
         ]
     )
 )

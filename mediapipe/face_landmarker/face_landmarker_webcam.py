@@ -1,8 +1,9 @@
-import cv2
-import pathlib
 import urllib
+import pathlib
 
 import numpy as np
+
+import cv2
 
 import mediapipe as mp
 from mediapipe import solutions
