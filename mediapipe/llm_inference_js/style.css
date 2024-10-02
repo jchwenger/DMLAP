@@ -1,0 +1,81 @@
+html {
+  height: 100%;
+}
+
+/* Grid inspiration: https://stackoverflow.com/a/64374418
+ * And: https://css-tricks.com/snippets/css/complete-guide-grid/
+ * Also: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+body {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 1fr min-content;
+  height: 100%;
+  width: 100%;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+#input-controls {
+  grid-row-start: 2;
+  grid-column-start: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+#input {
+  border-radius: 0.75rem;
+  flex-grow: 3;
+  padding: 5px;
+}
+
+#submit {
+  border-radius: 0.75rem;
+  flex-grow: 1;
+}
+
+#output {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* https://stackoverflow.com/a/62493382 */
+
+.bubble {
+  border: solid 1px;
+  background: #EEE;
+  margin-bottom: 0.25rem;
+  max-width: 60%;
+  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.75rem;
+  position: relative;
+}
+
+.bubble.left {
+  border-color: #40eb34;
+  background: #b0faa5;
+  align-self: flex-start;
+}
+
+.bubble.right {
+  border-color: #33f5ff;
+  background: #c9fdff;
+  align-self: flex-end;
+}
+
+.bubble p {
+  margin: 0;
+}
