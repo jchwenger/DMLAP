@@ -1,0 +1,23 @@
+main {
+  display: flex;
+  gap: 10px;
+}
+
+/* Check this: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+#input-controls {
+  display:flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#input {
+  border-radius: 5px;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+#input-button {
+  height: 50px;
+}
