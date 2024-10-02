@@ -1,3 +1,7 @@
 # models
 **/*.task
 **/*.tflite
+**/*.bin
+
+# ruff
+.ruff_cache
