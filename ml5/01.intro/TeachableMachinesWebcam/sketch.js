@@ -58,7 +58,7 @@ function draw() {
   textAlign(CENTER);
 
   if (label) { // don't display if the label is empty
-    text(` ${label} (${confidence.toFixed(2) * 100}% confidence)`, width / 2, height - 4);
+    text(`${label} (${confidence.toFixed(2) * 100}% confidence)`, width / 2, height - 4);
   }
 }
 
@@ -73,7 +73,7 @@ function gotResult(results) {
   // The results are in an array ordered by confidence.
   // console.log(results[0]);
   label = results[0].label;           
-  confidence = results[0].confidence; 
+  confidence = results[0].confidence;
 
   // IDEA: can you modify this sketch to display not just the first
   // label (results[0]), but all of them? You would need to change

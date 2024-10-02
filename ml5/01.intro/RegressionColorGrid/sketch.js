@@ -68,7 +68,7 @@ function setup() {
   ml5.setBackend("webgl");
 
   // set our background once at the start
-  background(255);
+  background(200);
 
   ourColor = color(255,10,10);
 
@@ -159,7 +159,7 @@ function keyPressed() {
       nn.normalizeData();    // Normalise our data
       nn.train({
         epochs: 35,          // This controls for how long we train!
-        batchSize: 32,       // We will see what all this means soon
+        batchSize: 12,       // We will see what all this means soon
         learningRate: 0.2,
         validationSplit: 0.0 // By default we won't perform any validation (this does not influence training, but removes datapoints if > 0)
       }, finishedTraining);  // This is a callback: the function finishedTraining is called when the training is over
