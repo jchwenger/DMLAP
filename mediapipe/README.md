@@ -2,7 +2,7 @@
 
 Examples of Python scripts using [mediapipe](https://ai.google.dev/edge/mediapipe/solutions/guide), mostly adapted from [the example repo](https://github.com/google-ai-edge/mediapipe-samples) (and GPT...).
 
-## Requirements
+## Requirements
 
 Except for the llm inference examples (in JavaScript, requiring only to download the model and launch a web server), to start playing with this part of the repo, the simplest way is to create an environment and install mediapipe, for instance:
 
