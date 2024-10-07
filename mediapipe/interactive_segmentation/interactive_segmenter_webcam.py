@@ -31,7 +31,7 @@ def _normalized_to_pixel_coordinates(
 
 
 # Path to the model file
-model_path = pathlib.Path("interactiv_segmenter.tflite")
+model_path = pathlib.Path("interactive_segmenter.tflite")
 
 # Check if the model file exists, if not, download it
 if not model_path.exists():
