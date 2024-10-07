@@ -142,7 +142,7 @@ def run(args):
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
 
-        # # Run object detection using the model.
+        # Run object detection using the model.
         detector.detect_async(mp_image, counter)
         current_frame = mp_image.numpy_view()
         current_frame = cv2.cvtColor(current_frame, cv2.COLOR_RGB2BGR)
@@ -155,6 +155,10 @@ def run(args):
                 start_time = time.time()
 
             show_fps(current_frame, fps)
+
+        # Print result list on pressing 'p'
+        if cv2.waitKey(5) & 0xFF == ord("p"):
+            print(detection_result_list)
 
         if detection_result_list:
             # print(detection_result_list)
