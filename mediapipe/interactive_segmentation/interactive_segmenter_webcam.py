@@ -1,3 +1,10 @@
+# --------------------------------------------------------------------------------
+# Commands:
+#   - '1' to toggle foreground mask 
+#   - '2' to toggle background mask 
+#     (0: no mask, 1: mask only, 2: mask with transparency)
+# --------------------------------------------------------------------------------
+
 import math
 import urllib
 import pathlib
