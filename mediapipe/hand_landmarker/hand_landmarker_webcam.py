@@ -57,6 +57,7 @@ def draw_landmarks_on_image(rgb_image, detection_result):
                 for landmark in hand_landmarks
             ]
         )
+        # source code here: https://github.com/google-ai-edge/mediapipe/blob/e5067b2134fa28e4c248aa482ef18ac57afb9d58/mediapipe/python/solutions/drawing_utils.py#L119
         mp.solutions.drawing_utils.draw_landmarks(
             annotated_image,
             hand_landmarks_proto,

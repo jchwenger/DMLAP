@@ -6,7 +6,6 @@ import numpy as np
 import cv2
 
 import mediapipe as mp
-from mediapipe import solutions
 from mediapipe.framework.formats import landmark_pb2
 from mediapipe.tasks.python import vision
 from mediapipe.tasks.python.core import base_options as base_options_module
@@ -31,26 +30,27 @@ def draw_landmarks_on_image(rgb_image, detection_result):
             ]
         )
 
-        solutions.drawing_utils.draw_landmarks(
+        # source code here: https://github.com/google-ai-edge/mediapipe/blob/e5067b2134fa28e4c248aa482ef18ac57afb9d58/mediapipe/python/solutions/drawing_utils.py#L119
+        mp.solutions.drawing_utils.draw_landmarks(
             image=annotated_image,
             landmark_list=face_landmarks_proto,
-            connections=solutions.face_mesh.FACEMESH_TESSELATION,
+            connections=mp.solutions.face_mesh.FACEMESH_TESSELATION,
             landmark_drawing_spec=None,
-            connection_drawing_spec=solutions.drawing_styles.get_default_face_mesh_tesselation_style(),
+            connection_drawing_spec=mp.solutions.drawing_styles.get_default_face_mesh_tesselation_style(),
         )
-        solutions.drawing_utils.draw_landmarks(
+        mp.solutions.drawing_utils.draw_landmarks(
             image=annotated_image,
             landmark_list=face_landmarks_proto,
-            connections=solutions.face_mesh.FACEMESH_CONTOURS,
+            connections=mp.solutions.face_mesh.FACEMESH_CONTOURS,
             landmark_drawing_spec=None,
-            connection_drawing_spec=solutions.drawing_styles.get_default_face_mesh_contours_style(),
+            connection_drawing_spec=mp.solutions.drawing_styles.get_default_face_mesh_contours_style(),
         )
-        solutions.drawing_utils.draw_landmarks(
+        mp.solutions.drawing_utils.draw_landmarks(
             image=annotated_image,
             landmark_list=face_landmarks_proto,
-            connections=solutions.face_mesh.FACEMESH_IRISES,
+            connections=mp.solutions.face_mesh.FACEMESH_IRISES,
             landmark_drawing_spec=None,
-            connection_drawing_spec=solutions.drawing_styles.get_default_face_mesh_iris_connections_style(),
+            connection_drawing_spec=mp.solutions.drawing_styles.get_default_face_mesh_iris_connections_style(),
         )
 
     return annotated_image

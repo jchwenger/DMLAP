@@ -8,7 +8,6 @@ import cv2
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from mediapipe import solutions
 from mediapipe.framework.formats import landmark_pb2
 
 # Function to draw landmarks on the image
@@ -30,12 +29,15 @@ def draw_landmarks_on_image(rgb_image, detection_result):
                 for landmark in pose_landmarks
             ]
         )
-        solutions.drawing_utils.draw_landmarks(
+
+        # source code here: https://github.com/google-ai-edge/mediapipe/blob/e5067b2134fa28e4c248aa482ef18ac57afb9d58/mediapipe/python/solutions/drawing_utils.py#L119
+        mp.solutions.drawing_utils.draw_landmarks(
             annotated_image,
             pose_landmarks_proto,
-            solutions.pose.POSE_CONNECTIONS,
-            solutions.drawing_styles.get_default_pose_landmarks_style(),
+            mp.solutions.pose.POSE_CONNECTIONS,
+            mp.solutions.drawing_styles.get_default_pose_landmarks_style(),
         )
+
     return annotated_image
 
 
