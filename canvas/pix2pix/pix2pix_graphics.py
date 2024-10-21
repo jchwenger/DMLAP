@@ -25,8 +25,10 @@ full = False
 w, h = 512, 512
 vid = VideoInput(size=(w, h))
 
+# model available here:
+# https://drive.google.com/file/d/1H95702mO-7dkYjaJa_Bz4AqUvPL2B7vS/view?usp=sharing
 PIX2PIX_PATH = (
-    "../../python/models/pix2pix_cityscapes/pix2pix_cityscapes.iter_23496_scripted.pt"
+    "../../python/models/pix2pix_facades/pix2pix_facades.iter_8000_scripted.pt"
 )
 
 # Load pix2pix model
