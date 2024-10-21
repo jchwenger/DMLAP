@@ -1,0 +1,5 @@
+# python venv folders
+env
+venv
+.env
+.venv

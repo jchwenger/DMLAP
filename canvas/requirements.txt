@@ -1,0 +1,9 @@
+jupyter
+numpy
+pycairo
+matplotlib
+opencv-python
+pyglfw
+moderngl
+imgui
+py5canvas
