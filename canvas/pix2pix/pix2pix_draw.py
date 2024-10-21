@@ -24,9 +24,9 @@ w, h = 512, 256
 # Empty result initially
 result = np.zeros((256, 256, 3))
 
-# model available here:
-# https://drive.usercontent.google.com/u/0/uc?id=1OmSp5ymSFHu_M4ZJPmt-u-DROCalFRzK&export=download
-PIX2PIX_PATH = (
+# model available here:
+# https://drive.usercontent.google.com/u/0/uc?id=1OmSp5ymSFHu_M4ZJPmt-u-DROCalFRzK&export=download
+PIX2PIX_PATH = pathlib.Path(
     "../../python/models/pix2pix_rembrandt/pix2pix_rembrandt.iter_10879_scripted.pt"
 )
 

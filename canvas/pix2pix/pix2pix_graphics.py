@@ -27,7 +27,7 @@ vid = VideoInput(size=(w, h))
 
 # model available here:
 # https://drive.google.com/file/d/1H95702mO-7dkYjaJa_Bz4AqUvPL2B7vS/view?usp=sharing
-PIX2PIX_PATH = (
+PIX2PIX_PATH = pathlib.Path(
     "../../python/models/pix2pix_facades/pix2pix_facades.iter_8000_scripted.pt"
 )
 
@@ -37,6 +37,7 @@ G = torch.jit.load(PIX2PIX_PATH, map_location=device)
 print(G)
 print()
 print(f"Our model has {sum(p.numel() for p in G.parameters()):,} parameters.")
+
 
 def generate(model, image):
     # from (h,w,c) to (c,h,w)
@@ -65,15 +66,18 @@ def generate(model, image):
 
 
 def jet_color(v):
-    c = matplotlib.colormaps.get_cmap('jet')
-    return np.array(c(v)) * 255 # The output of this function is between 0 and 1, we will use 0 to 255 colors
+    c = matplotlib.colormaps.get_cmap("jet")
+    return (
+        np.array(c(v)) * 255
+    )  # The output of this function is between 0 and 1, we will use 0 to 255 colors
 
 
 # this gives us values between 0 and 1 for the labels
 labels = np.linspace(0, 1, 12)
 
+
 def random_label():
-    return np.random.choice(labels[2:]) # simply excludes background and facade
+    return np.random.choice(labels[2:])  # simply excludes background and facade
 
 
 # # Draw the main facade
@@ -82,17 +86,18 @@ def random_label():
 # rect(pad, pad, 256-pad*2, 256)
 
 ## Draw some random rectangle with random feature colors
-#for i in range(30):
+# for i in range(30):
 #    fill(jet_color(random_label()))
 #    rect(np.random.uniform(pad, height-pad*2, size=2), np.random.uniform(2, 7, size=2)*6)
 #    #fill(jet_color(random_label()))
 #    #circle(np.random.uniform(pad, height-pad, size=2), np.random.uniform(5, height*0.15)*0.5) #, size=2))
 ## Get the left half of the canvas image
-#img = get_image()[:, :256]
+# img = get_image()[:, :256]
 
 # # And transform it using our pix2pix model
 # result = generate(model, img.copy())
 # image(result, [256, 0])
+
 
 def setup():
     sketch.create_canvas(w, h)
@@ -100,7 +105,6 @@ def setup():
 
 
 def draw():
-
     # Fill with the darkest color (background)
     background(jet_color(0)[:-1])
     no_stroke()
@@ -115,7 +119,7 @@ def draw():
         fill(jet_color(random_label()))
         rect(
             np.random.uniform(-height / 2, height / 2, size=2),
-            np.random.uniform(5, 30, size=2)
+            np.random.uniform(5, 30, size=2),
         )
     pop()
 
@@ -134,9 +138,11 @@ def draw():
         result = generate(G, img)
         image(result, [256, 0], [256, 512])
 
+
 def key_pressed(key, modifier):
     global full
     if key == "f":
         full = not full
+
 
 run()

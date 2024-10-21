@@ -25,10 +25,10 @@ full = False
 w, h = 512, 512
 vid = VideoInput(size=(w, h))
 
-# models available here:
-# https://drive.google.com/file/d/15j05wWFJsMd2OS7sxlFmG4z2exmIzJAK/view?usp=sharing
+# models available here:
+# https://drive.google.com/file/d/15j05wWFJsMd2OS7sxlFmG4z2exmIzJAK/view?usp=sharing
 # https://drive.google.com/file/d/1BScyTUQI3F0DRm5ICGBejNzTsPGWW7O1/view?usp=sharing
-PIX2PIX_PATH = (
+PIX2PIX_PATH = pathlib.Path(
     "../../python/models/pix2pix_edge2comics/pix2pix_edge2comics.iter_16583_scripted.pt"
     # "../../python/models/pix2pix_edge2comics/edge2comics_60_generator_scripted.pt"
 )
