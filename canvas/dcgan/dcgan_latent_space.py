@@ -2,6 +2,8 @@ import os
 import urllib
 import pathlib
 
+from PIL import Image
+
 import torch
 
 from py5canvas import *
@@ -41,24 +43,17 @@ n_frames = 100
 # Local path to your trained net
 # DCGAN_PATH  = pathlib.Path("../../python/models/dcgan_mnist/dcgan_mnist_g.iter_0936_scripted.pt")
 
-# If the script does not find the file, it will attempt downloading a model
-# (from my drive)
-# MNIST
-DCGAN_PATH = pathlib.Path("dcgan_mnist_g.iter_0936_scripted.pt")
+# models available here:
+# MNIST: https://drive.usercontent.google.com/u/0/uc?id=1ZuePaVjXaAkQJTdeu060ELip6Ri6VMl2&export=download
+# FashionMNIST: https://drive.usercontent.google.com/u/0/uc?id=1ZOozan_vi6yCC6ulFtHHUS2jbT_BUUqd&export=download
+# CelebA (requires three channels): https://drive.google.com/file/d/1WBfUkjOtgTX2c2UgFYZY4skjMzDaGi2y/view?usp=sharing
 
-# FashionMNIST
-# DCGAN_PATH  = pathlib.Path("dcgan_fashion_mnist_g.iter_2239_scripted.pt")
-
-# Check if the model file exists, if not, download it
-if not DCGAN_PATH.exists():
-    # MNIST
-    url = "https://drive.usercontent.google.com/u/0/uc?id=1ZuePaVjXaAkQJTdeu060ELip6Ri6VMl2&export=download"
-    # FashionMNIST
-    # url = "https://drive.usercontent.google.com/u/0/uc?id=1ZOozan_vi6yCC6ulFtHHUS2jbT_BUUqd&export=download"
-    print()
-    print(f"Downloading model from {url}...")
-    urllib.request.urlretrieve(url, DCGAN_PATH)
-    print(f"Model downloaded and saved as {DCGAN_PATH}")
+N_CHANNELS = 1  # 3 for colour
+DCGAN_PATH = pathlib.Path(
+    "../../python/models/dcgan_mnist/dcgan_mnist_g.iter_0936_scripted.pt"
+    # "../../python/models/dcgan_fashion_mnist/dcgan_fashion_mnist_g.iter_2339_scripted.pt"
+    # "../../python/models/dcgan_celeba/dcgan_celeba_g.iter_6791_scripted.pt"
+)
 
 # Load generator model
 G = torch.jit.load(DCGAN_PATH, map_location=device)
@@ -86,31 +81,35 @@ def slerp(val, low, high):
 
 
 # Runs the model on an input image
-def generate_image(model):
+def generate(model):
+    global N_CHANNELS
     with torch.no_grad():
         noise = slerp(((sketch.frame_count) % n_frames) / n_frames, a, b)
-        generated_image = G(noise).detach().cpu().squeeze()
-        generated_image = torch.clip(generated_image, -1, 1).numpy()
-    return generated_image * 0.5 + 0.5
+        img = G(noise).detach()[0].cpu()
+        img = torch.permute(img, (1, 2, 0))
+        img = torch.clip(img, -1, 1).numpy()
+        if N_CHANNELS == 1:
+            img = img.squeeze()
+        else:
+            img = np.dstack([img, np.ones(img.shape[:2])])
+    return img * 0.5 + 0.5
 
 
 def setup():
-    sketch.create_canvas(w, h)
-    sketch.frame_rate(60)
+    create_canvas(w, h)
+    frame_rate(60)
 
 
 def draw():
-    c = sketch.canvas
-
     global a, b  # We neeed this to modify a and b
 
     if sketch.frame_count % n_frames == 0:
         a, b = b, a
         b = random_latent_vector()
 
-    c.background(0)
-    img = generate_image(G)
-    c.image(img, [0, 0], [c.width, c.height], opacity=1)
+    background(0)
+    img = generate(G)
+    image(img, [0, 0], [width, height], opacity=1)
 
 
 run()
