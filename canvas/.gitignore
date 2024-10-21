@@ -3,3 +3,6 @@ env
 venv
 .env
 .venv
+
+# torch models
+**/*.pt
