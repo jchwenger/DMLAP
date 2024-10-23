@@ -13,11 +13,10 @@ from py5canvas import *
 device = (
     "cuda"
     if torch.cuda.is_available()
-    else "mps"
-    if torch.backends.mps.is_available()
+    # else "mps" # issue on mps with ConvTranspose2d
+    # if torch.backends.mps.is_available()
     else "cpu"
 )
-device = "cpu"  # bug with conv_transpose2d on mps
 print(f"Using {device} device")
 
 # Output size
