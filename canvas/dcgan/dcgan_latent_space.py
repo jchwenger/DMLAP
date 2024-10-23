@@ -48,10 +48,10 @@ n_frames = 100
 # FashionMNIST: https://drive.usercontent.google.com/u/0/uc?id=1ZOozan_vi6yCC6ulFtHHUS2jbT_BUUqd&export=download
 # CelebA (requires three channels): https://drive.google.com/file/d/1WBfUkjOtgTX2c2UgFYZY4skjMzDaGi2y/view?usp=sharing
 
-N_CHANNELS = 1  # 3 for colour
 DCGAN_PATH = pathlib.Path(
     "../../python/models/dcgan_mnist/dcgan_mnist_g.iter_0936_scripted.pt"
     # "../../python/models/dcgan_fashion_mnist/dcgan_fashion_mnist_g.iter_2339_scripted.pt"
+    # "../../python/models/dcgan_fashion_mnist_redux/dcgan_mnist_g.iter_2340_scripted.pt"
     # "../../python/models/dcgan_celeba/dcgan_celeba_g.iter_6791_scripted.pt"
 )
 
@@ -82,16 +82,11 @@ def slerp(val, low, high):
 
 # Runs the model on an input image
 def generate(model):
-    global N_CHANNELS
     with torch.no_grad():
         noise = slerp(((sketch.frame_count) % n_frames) / n_frames, a, b)
         img = G(noise).detach()[0].cpu()
         img = torch.permute(img, (1, 2, 0))
-        img = torch.clip(img, -1, 1).numpy()
-        if N_CHANNELS == 1:
-            img = img.squeeze()
-        else:
-            img = np.dstack([img, np.ones(img.shape[:2])])
+        img = torch.clip(img, -1, 1)
     return img * 0.5 + 0.5
 
 
